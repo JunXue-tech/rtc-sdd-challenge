@@ -624,6 +624,12 @@
       line-height: 1.25;
       font-weight: 900;
     }
+    .leaderboard-update-note {
+      margin: -4px 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
     .leaderboard-table {
       width: 100%;
       min-width: 900px;
@@ -631,15 +637,47 @@
       border-spacing: 0;
       color: var(--ink-soft);
       background: var(--surface);
-      border: 1px solid var(--line);
       border-radius: var(--radius-sm);
       overflow: hidden;
       font-size: 15px;
     }
+    .registered-team-panel {
+      padding: 22px;
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+    }
+    .registered-team-summary {
+      margin: -4px 0 16px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .registered-team-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .team-chip {
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 14px;
+      border: 1px solid rgba(0,188,212,.20);
+      border-radius: 999px;
+      color: var(--blue);
+      background: var(--surface-soft);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .team-chip.empty {
+      color: var(--muted);
+      border-style: dashed;
+      background: #fff;
+    }
     .leaderboard-table th,
     .leaderboard-table td {
       padding: 11px 16px;
-      border-bottom: 1px solid var(--line);
       line-height: 1.35;
       text-align: left;
       white-space: nowrap;
@@ -648,9 +686,6 @@
       color: var(--blue);
       background: var(--surface-soft);
       font-weight: 900;
-    }
-    .leaderboard-table tbody tr:last-child td {
-      border-bottom: 0;
     }
     .leaderboard-table .placeholder-row td {
       color: var(--muted);
@@ -1218,8 +1253,19 @@
       </div>
       <section class="section wide">
         <div class="leaderboard-stack">
+          <div class="leaderboard-table-block" id="registered-teams">
+            <h2 class="leaderboard-table-title">Registered Teams</h2>
+            <p class="registered-team-summary" id="registeredTeamSummary">0 teams registered · Last updated: unknown</p>
+            <div class="registered-team-panel">
+              <div class="registered-team-list" id="registeredTeamList" aria-label="Registered teams">
+                <span class="team-chip empty">Loading teams...</span>
+              </div>
+            </div>
+          </div>
+
           <div class="leaderboard-table-block">
             <h2 class="leaderboard-table-title">Progress Evaluation Stage</h2>
+            <p class="leaderboard-update-note">Updated after the progress stage closes.</p>
             <div class="leaderboard-table-wrap">
               <table class="leaderboard-table" aria-label="RTC-SDD progress-stage leaderboard">
                 <thead>
@@ -1243,6 +1289,7 @@
 
           <div class="leaderboard-table-block">
             <h2 class="leaderboard-table-title">Final Evaluation Stage</h2>
+            <p class="leaderboard-update-note">Updated after the final stage closes.</p>
             <div class="leaderboard-table-wrap">
               <table class="leaderboard-table" aria-label="RTC-SDD evaluation-stage leaderboard">
                 <thead>
@@ -1375,7 +1422,17 @@
             <div class="num-badge">1</div>
             <div>
               <h3>Register your team</h3>
-              <p>Complete the registration form with your team name, member names, contact emails, affiliation, and Codabench account information, and then register for the challenge on Codabench. All registration information should be provided in English. Your registration is successfully completed once you receive the confirmation email from Codabench.</p>
+              <ul>
+                <li>
+                  Complete the registration form with your team name, member names, contact emails, affiliation, and Codabench account information. All registration information should be provided in English.
+                </li>
+                <li>
+                  Register for the challenge on Codabench. Your registration is successfully completed once you receive the confirmation email from Codabench.
+                </li>
+                <li>
+                  Successfully registered teams are listed on the Leaderboard page of the official website. Please contact the organizers if you notice any issues.
+                </li>
+              </ul>
               <a class="button soft" href="https://docs.google.com/forms/d/e/1FAIpQLSdQlOPpi9WWx3RDlXwRhTVEWrGP0Y6FNAHolffgDdA5ESNdlQ/viewform" target="_blank" rel="noreferrer">Registration Form</a>
               <a class="button soft" href="https://www.codabench.org/competitions/17381/" target="_blank" rel="noreferrer">Codabench</a>
             </div>
@@ -1615,11 +1672,14 @@
     const searchResults = document.getElementById('searchResults');
     const searchClose = document.getElementById('searchClose');
     const searchOpenButtons = Array.from(document.querySelectorAll('[data-search-open]'));
+    const registeredTeamSummary = document.getElementById('registeredTeamSummary');
+    const registeredTeamList = document.getElementById('registeredTeamList');
 
     const searchIndex = [
       { route: 'home', anchor: 'dates', title: 'Important Dates' },
       { route: 'home', anchor: 'contact', title: 'Contact Us' },
       { route: 'leaderboard', anchor: '', title: 'Leaderboard'},
+      { route: 'leaderboard', anchor: 'registered-teams', title: 'Registered Teams'},
       { route: 'challenge', anchor: '', title: 'RTC-SDD Challenge'},
       { route: 'challenge', anchor: 'overview', title: 'RTC-SDD Dataset'},
       { route: 'challenge', anchor: 'evaluation-metrics', title: 'Evaluation Metrics'},
@@ -1682,6 +1742,54 @@
     function routeLabel(route) {
       if (route === 'challenge') return 'RTC-SDD Challenge';
       return route.charAt(0).toUpperCase() + route.slice(1);
+    }
+
+    function formatUpdatedDate(value) {
+      if (!value) return 'unknown';
+      const date = new Date(`${value}T00:00:00`);
+      if (Number.isNaN(date.getTime())) return value;
+      return date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    }
+
+    function renderRegisteredTeams(data) {
+      if (!registeredTeamSummary || !registeredTeamList) return;
+      const teams = Array.isArray(data?.teams)
+        ? data.teams.filter(team => typeof team === 'string' && team.trim()).map(team => team.trim())
+        : [];
+      const teamCount = teams.length;
+      const teamLabel = teamCount === 1 ? 'team' : 'teams';
+      registeredTeamSummary.textContent = `${teamCount} ${teamLabel} registered · Last updated: ${formatUpdatedDate(data?.updatedAt)}`;
+      registeredTeamList.replaceChildren();
+
+      if (!teams.length) {
+        const emptyChip = document.createElement('span');
+        emptyChip.className = 'team-chip empty';
+        emptyChip.textContent = 'No confirmed teams yet';
+        registeredTeamList.append(emptyChip);
+        return;
+      }
+
+      teams.forEach(team => {
+        const chip = document.createElement('span');
+        chip.className = 'team-chip';
+        chip.textContent = team;
+        registeredTeamList.append(chip);
+      });
+    }
+
+    async function loadRegisteredTeams() {
+      if (!registeredTeamSummary || !registeredTeamList) return;
+      try {
+        const response = await fetch(`json/registered-teams.json?ts=${Date.now()}`, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        renderRegisteredTeams(await response.json());
+      } catch (error) {
+        console.warn('Unable to load registered-teams.json.', error);
+      }
     }
 
     function navigateTo(route, anchor = '') {
@@ -1772,6 +1880,7 @@
     });
 
     window.addEventListener('hashchange', () => setPage(getRouteFromHash(), true, getAnchorFromHash()));
+    loadRegisteredTeams();
     setPage(getRouteFromHash(), false, getAnchorFromHash());
   </script>
 </body>
