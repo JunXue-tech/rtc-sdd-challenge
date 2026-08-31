@@ -1801,7 +1801,9 @@
 
     function formatUpdatedDate(value) {
       if (!value) return 'unknown';
-      const date = new Date(`${value}T00:00:00`);
+      const date = /^\d{4}-\d{2}-\d{2}$/.test(value)
+        ? new Date(`${value}T00:00:00`)
+        : new Date(value);
       if (Number.isNaN(date.getTime())) return value;
       return date.toLocaleDateString('en-US', {
         month: 'short',
@@ -1810,14 +1812,26 @@
       });
     }
 
-    function renderRegisteredTeams(data) {
+    function parseRegisteredTeamsText(text) {
+      const result = { teams: [], updatedAt: '' };
+      text.split(/\r?\n/).forEach(line => {
+        const trimmed = line.trim();
+        if (!trimmed) return;
+        const updatedAtMatch = trimmed.match(/^#\s*updatedAt\s*:\s*(.+)$/i);
+        if (updatedAtMatch) {
+          result.updatedAt = updatedAtMatch[1].trim();
+          return;
+        }
+        if (!trimmed.startsWith('#')) result.teams.push(trimmed);
+      });
+      return result;
+    }
+
+    function renderRegisteredTeams(teams, updatedAt) {
       if (!registeredTeamSummary || !registeredTeamList) return;
-      const teams = Array.isArray(data?.teams)
-        ? data.teams.filter(team => typeof team === 'string' && team.trim()).map(team => team.trim())
-        : [];
       const teamCount = teams.length;
       const teamLabel = teamCount === 1 ? 'team' : 'teams';
-      registeredTeamSummary.textContent = `${teamCount} ${teamLabel} registered · Last updated: ${formatUpdatedDate(data?.updatedAt)}`;
+      registeredTeamSummary.textContent = `${teamCount} ${teamLabel} registered · Last updated: ${formatUpdatedDate(updatedAt)}`;
       registeredTeamList.replaceChildren();
 
       if (!teams.length) {
@@ -1839,11 +1853,12 @@
     async function loadRegisteredTeams() {
       if (!registeredTeamSummary || !registeredTeamList) return;
       try {
-        const response = await fetch(`json/registered-teams.json?ts=${Date.now()}`, { cache: 'no-store' });
+        const response = await fetch(`data/registered-teams.txt?ts=${Date.now()}`, { cache: 'no-store' });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        renderRegisteredTeams(await response.json());
+        const parsed = parseRegisteredTeamsText(await response.text());
+        renderRegisteredTeams(parsed.teams, parsed.updatedAt);
       } catch (error) {
-        console.warn('Unable to load registered-teams.json.', error);
+        console.warn('Unable to load registered-teams.txt.', error);
       }
     }
 
