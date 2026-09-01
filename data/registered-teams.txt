@@ -26,6 +26,7 @@ AFCT
 CCNT
 scy919
 TUA
+anti spoofing 2026
 NJUPT AIC
 Begonia Creek
 DFKI-SLT
@@ -47,3 +48,4 @@ Kairot
 UESTC
 AuroraPulse
 KZXU
+tonghuashungogogo
