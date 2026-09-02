@@ -1,4 +1,4 @@
-# updatedAt: 2026-09-01
+# updatedAt: 2026-09-02
 
 baiyangzhijian
 ASTAR_SHIELD
@@ -38,6 +38,7 @@ BIUBIUBIU
 RTC_Guard
 Avengers
 lab1010
+Overtone
 FlashAttention
 True Audio Security Team
 Anno Tokyo
@@ -46,6 +47,13 @@ musevoice
 SIT
 Kairot
 UESTC
+AAA
 AuroraPulse
 KZXU
 tonghuashungogogo
+Mark Two
+Raid AI
+szshen
+Erin
+Zyear_team
+AI voice
