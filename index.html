@@ -27,12 +27,12 @@
       --cyan-2: #4ea9bd;
       --teal: #227f76;
       --blue: #245f8f;
-      --nav-height: 76px;
+      --nav-height: 68px;
       --max-width: 1180px;
       --content-width: 980px;
-      --radius-sm: 14px;
-      --radius-md: 22px;
-      --radius-lg: 34px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
       --shadow-sm: 0 10px 24px rgba(31, 59, 86, .06);
       --shadow-md: 0 18px 42px rgba(31, 59, 86, .09);
       --ease: cubic-bezier(.2, .8, .2, 1);
@@ -43,6 +43,9 @@
     body {
       margin: 0;
       min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
       color: var(--ink);
       background: var(--bg);
       font-family: "Merriweather", Georgia, serif;
@@ -135,40 +138,56 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 4px;
-      padding: 5px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: #f8fafc;
-      box-shadow: none;
+      gap: 18px;
     }
     .nav-link,
     .search-trigger {
-      min-height: 40px;
+      min-height: 32px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0 14px;
+      position: relative;
+      padding: 0 2px;
       border: 0;
-      border-radius: 999px;
+      border-radius: 0;
       color: var(--ink-soft);
       background: transparent;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       white-space: nowrap;
       cursor: pointer;
-      transition: background .18s var(--ease), color .18s var(--ease), transform .18s var(--ease);
+      transition: color .18s var(--ease);
     }
     .nav-link:hover,
-    .search-trigger:hover { color: var(--blue); background: rgba(0, 188, 212, .10); }
-    .nav-link.active {
-      color: #fff;
+    .search-trigger:hover {
+      color: var(--blue);
+      background: transparent;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 2px;
+      height: 2px;
+      border-radius: 999px;
       background: var(--blue);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .18s var(--ease);
+    }
+    .nav-link.active {
+      color: var(--blue);
+      background: transparent;
+    }
+    .nav-link.active::after {
+      transform: scaleX(1);
     }
     .search-trigger {
-      width: 40px;
+      width: 32px;
       padding: 0;
-      font-size: 20px;
+      border-radius: 999px;
+      font-size: 18px;
     }
 
     .menu-button {
@@ -207,14 +226,35 @@
     .mobile-nav .search-trigger {
       width: 100%;
       justify-content: flex-start;
+      min-height: 38px;
       border: 1px solid var(--line);
       border-radius: 14px;
       background: #fff;
     }
+    .mobile-nav .nav-link {
+      padding: 0 14px;
+    }
+    .mobile-nav .nav-link::after {
+      left: 14px;
+      right: auto;
+      width: 34px;
+      bottom: 5px;
+      transform: scaleX(0);
+      transform-origin: left;
+    }
     .mobile-nav .search-trigger { padding: 0 14px; font-size: 15px; }
-    .mobile-nav .nav-link.active { color: #fff; background: var(--blue); }
+    .mobile-nav .nav-link.active {
+      color: var(--blue);
+      background: #fff;
+    }
+    .mobile-nav .nav-link.active::after {
+      transform: scaleX(1);
+    }
 
-    main { min-height: 70vh; }
+    main {
+      flex: 1 0 auto;
+      min-height: 70vh;
+    }
     .page { display: none; }
     .page.active { display: block; animation: fadeIn .24s var(--ease); }
     @keyframes fadeIn {
@@ -338,7 +378,6 @@
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
       background: var(--surface);
-      box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.9);
     }
     .challenge-list {
       display: grid;
@@ -351,7 +390,6 @@
       border: 1px solid var(--line);
       border-radius: var(--radius-md);
       background: var(--surface);
-      box-shadow: 0 8px 20px rgba(31, 59, 86, .05);
     }
     .welcome-title {
       max-width: 100%;
@@ -389,7 +427,6 @@
     .coming-card {
       border: 1px solid var(--line);
       background: var(--surface);
-      box-shadow: 0 8px 20px rgba(31, 59, 86, .05);
     }
 
     .overview-image-card {
@@ -397,14 +434,13 @@
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
       background: var(--surface);
-      box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.9);
       overflow: hidden;
     }
     .overview-image {
       display: block;
       width: 100%;
       height: auto;
-      border-radius: 22px;
+      border-radius: var(--radius-md);
       border: 1px solid rgba(8, 85, 112, .12);
       background: #fff;
     }
@@ -414,7 +450,6 @@
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
       background: var(--surface);
-      box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,.9);
     }
     .overview-process-card p {
       margin-bottom: 16px;
@@ -501,6 +536,7 @@
       line-height: 1.5;
     }
     .page-hero + .section.wide { padding-top: 36px; }
+    #page-faqs .page-hero + .section.wide { padding-bottom: 40px; }
     #page-challenge > .section.wide {
       padding-top: 38px;
       padding-bottom: 38px;
@@ -523,7 +559,7 @@
       flex-direction: column;
       justify-content: center;
       padding: 20px 22px;
-      border-radius: 18px;
+      border-radius: var(--radius-md);
     }
     #page-challenge .card-stack .card .kicker {
       align-self: flex-start;
@@ -578,7 +614,7 @@
       margin: 22px 0;
       padding: 20px 22px;
       border-left: 5px solid var(--cyan);
-      border-radius: 18px;
+      border-radius: var(--radius-md);
       color: var(--ink-soft);
       background: var(--surface);
       border-top: 1px solid var(--line);
@@ -586,6 +622,106 @@
       border-bottom: 1px solid var(--line);
     }
     .notice p:last-child { margin-bottom: 0; }
+
+    .faq-list {
+      display: grid;
+      gap: 10px;
+      counter-reset: faq-item;
+    }
+    .faq-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      counter-increment: faq-item;
+      overflow: hidden;
+    }
+    .faq-item summary {
+      display: grid;
+      grid-template-columns: 30px minmax(0, 1fr) max-content 24px;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 18px;
+      color: var(--ink);
+      cursor: pointer;
+      list-style: none;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::before {
+      content: "Q" counter(faq-item);
+      grid-column: 1;
+      grid-row: 1;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+    .faq-item summary > span:not(.faq-topic) {
+      grid-column: 2;
+      grid-row: 1;
+      min-width: 0;
+    }
+    .faq-item summary::after {
+      content: "+";
+      grid-column: 4;
+      grid-row: 1;
+      justify-self: end;
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--blue);
+      font-size: 18px;
+      line-height: 1;
+    }
+    .faq-item[open] summary::after {
+      content: "-";
+    }
+    .faq-topic {
+      grid-column: 3;
+      grid-row: 1;
+      width: max-content;
+      max-width: 100%;
+      padding: 3px 8px;
+      border: 1px solid rgba(23, 135, 166, .22);
+      border-radius: 999px;
+      color: var(--cyan);
+      background: #f1fbfc;
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.25;
+      justify-self: end;
+      white-space: nowrap;
+    }
+    .faq-answer {
+      padding: 12px 18px 14px;
+      border-top: 1px solid var(--line);
+      background: var(--surface);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .faq-answer p,
+    .faq-answer li {
+      text-align: left;
+    }
+    .faq-answer p {
+      margin-bottom: 8px;
+    }
+    .faq-answer ol {
+      margin-top: 6px;
+      margin-bottom: 8px;
+      padding-left: 20px;
+    }
+    .faq-answer li {
+      margin: 4px 0;
+    }
+    .faq-answer p:last-child,
+    .faq-answer ol:last-child {
+      margin-bottom: 0;
+    }
 
     .instruction-grid,
     .rules-grid,
@@ -616,7 +752,7 @@
     .restriction {
       margin-top: 14px;
       padding: 14px 16px;
-      border-radius: 14px;
+      border-radius: var(--radius-sm);
       border: 1px solid rgba(0,188,212,.18);
       background: var(--surface-soft);
       color: var(--ink-soft);
@@ -624,7 +760,7 @@
     #evaluation-metrics .restriction {
       margin: 22px 0 24px;
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: var(--radius-sm);
       background: var(--surface-soft);
       box-shadow: none;
     }
@@ -833,6 +969,7 @@
     .empty-search { padding: 24px; color: var(--muted); text-align: center; }
 
     .footer {
+      flex-shrink: 0;
       border-top: 1px solid var(--line);
       background: var(--surface);
     }
@@ -882,9 +1019,32 @@
       .timeline-row { grid-template-columns: 1fr; gap: 8px; padding: 20px; }
       .instruction-card,
       .rule-item { grid-template-columns: 1fr; padding: 22px; }
-      .overview-image-card { padding: 10px; border-radius: 24px; }
-      .overview-image { border-radius: 16px; }
-      .overview-process-card { padding: 22px; border-radius: 24px; }
+      .faq-item summary {
+        grid-template-columns: 30px minmax(0, 1fr) 24px;
+        padding: 14px 18px;
+      }
+      .faq-item summary::before {
+        grid-column: 1;
+        grid-row: 1;
+      }
+      .faq-item summary > span:not(.faq-topic) {
+        grid-column: 2;
+      }
+      .faq-item summary::after {
+        grid-column: 3;
+        grid-row: 1;
+      }
+      .faq-topic {
+        grid-column: 2 / -1;
+        grid-row: 2;
+        justify-self: start;
+      }
+      .faq-answer {
+        padding: 12px 18px 14px;
+      }
+      .overview-image-card { padding: 10px; border-radius: var(--radius-md); }
+      .overview-image { border-radius: var(--radius-sm); }
+      .overview-process-card { padding: 22px; border-radius: var(--radius-md); }
       .footer-inner { flex-direction: column; align-items: flex-start; }
     }
 
@@ -1059,6 +1219,7 @@
         <a class="nav-link" href="#challenge" data-route="challenge">RTC-SDD Challenge</a>
         <a class="nav-link" href="#instructions" data-route="instructions">Instructions</a>
         <a class="nav-link" href="#rules" data-route="rules">Rules</a>
+        <a class="nav-link" href="#faqs" data-route="faqs">FAQs</a>
         <a class="nav-link" href="#organizers" data-route="organizers">Organization</a>
         <button class="search-trigger" type="button" aria-label="Open global search" data-search-open>⌕</button>
       </nav>
@@ -1074,6 +1235,7 @@
       <a class="nav-link" href="#challenge" data-route="challenge">RTC-SDD Challenge</a>
       <a class="nav-link" href="#instructions" data-route="instructions">Instructions</a>
       <a class="nav-link" href="#rules" data-route="rules">Rules</a>
+      <a class="nav-link" href="#faqs" data-route="faqs">FAQs</a>
       <a class="nav-link" href="#organizers" data-route="organizers">Organization</a>
       <button class="search-trigger" type="button" data-search-open>Search</button>
     </nav>
@@ -1523,6 +1685,7 @@
           </article>
         </div>
       </section>
+
     </section>
 
     <section class="page" id="page-rules" data-page="rules">
@@ -1605,6 +1768,79 @@
               <p>Top-ranked teams invited to submit papers should provide sufficient technical details, including model architecture, training strategy, augmentation, external resources, and hyperparameters.</p>
             </div>
           </article>
+        </div>
+      </section>
+    </section>
+
+    <section class="page" id="page-faqs" data-page="faqs">
+      <div class="page-hero">
+        <section class="section wide">
+          <h1 class="page-title">FAQs</h1>
+          <p class="lead">Answers to frequently asked questions</p>
+        </section>
+      </div>
+      <section class="section wide">
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>
+              <span class="faq-topic">Registration</span>
+              <span>Is there a deadline for registration?</span>
+            </summary>
+            <div class="faq-answer">
+              <p>There is no fixed registration deadline. Teams may register at any time while the competition is ongoing.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span class="faq-topic">Registration</span>
+              <span>Can I update my registration information after submission?</span>
+            </summary>
+            <div class="faq-answer">
+              <p>Yes. If you need to update your team name, team members, email address, or any other registration information, please submit a new registration form with the updated information.</p>
+              <p>Please specify the changes in the Note field. This applies regardless of whether your previous registration has already been approved.</p>
+              <p>The organizing committee will review the updated information as soon as possible. Once the update has been approved, you will receive a new confirmation email.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span class="faq-topic">Registration</span>
+              <span>When will my RTCFake dataset access request be approved?</span>
+            </summary>
+            <div class="faq-answer">
+              <p>Dataset access requests from successfully registered teams will normally be approved within 24 hours.</p>
+              <p>If your request has not been approved after 24 hours, please check that:</p>
+              <ol>
+                <li>You have received the registration confirmation email indicating that your competition registration has been successfully approved.</li>
+                <li>The information provided in your Hugging Face access request is consistent with your competition registration information.</li>
+              </ol>
+              <p>If both conditions are satisfied and your request is still pending, please contact the organizing committee at <a href="mailto:rtcsddchallenge2027@gmail.com">rtcsddchallenge2027@gmail.com</a>.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span class="faq-topic">Rule Clarification</span>
+              <span>Can publicly released model weights trained, fine-tuned, or post-trained on external spoofing data be used?</span>
+            </summary>
+            <div class="faq-answer">
+              <p>No. Models that have been trained, fine-tuned, or post-trained on external spoofing data are not permitted, even if the weights are publicly available.</p>
+              <p>For example, <a href="https://huggingface.co/Speech-Arena-2025/DF_Arena_1B_V_1" target="_blank" rel="noreferrer">DF_Arena_1B_V_1</a> is not eligible for use in this competition because it has been trained on external spoofing data.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span class="faq-topic">Rule Clarification</span>
+              <span>What is considered an RTC platform, and is local simulation of RTC-related processing allowed?</span>
+            </summary>
+            <div class="faq-answer">
+              <p>In the competition rules, "RTC platforms" refer to real-world real-time communication platforms or services, such as Zoom, WeChat, and QQ. The official data must not be transmitted through these platforms for data augmentation.</p>
+              <p>Local and offline simulation of RTC-related processing is allowed, provided that the official data is not actually transmitted through a real-world RTC platform and that the augmentation otherwise complies with the competition rules.</p>
+              <p>For example, participants may use open-source WebRTC audio processing modules, such as AEC, NS, and AGC, or other locally implemented algorithms or processing pipelines to simulate RTC-related effects.</p>
+            </div>
+          </details>
         </div>
       </section>
     </section>
@@ -1720,7 +1956,7 @@
   </footer>
 
   <script>
-    const VALID_ROUTES = ['home', 'leaderboard', 'challenge', 'instructions', 'rules', 'organizers'];
+    const VALID_ROUTES = ['home', 'leaderboard', 'challenge', 'instructions', 'rules', 'faqs', 'organizers'];
     const pages = Array.from(document.querySelectorAll('.page[data-page]'));
     const routeLinks = Array.from(document.querySelectorAll('[data-route]'));
     const menuButton = document.getElementById('menuButton');
@@ -1743,6 +1979,7 @@
       { route: 'challenge', anchor: 'evaluation-metrics', title: 'Evaluation Metrics'},
       { route: 'instructions', anchor: '', title: 'Instructions' },
       { route: 'rules', anchor: '', title: 'Rules' },
+      { route: 'faqs', anchor: '', title: 'FAQs', text: 'Frequently Asked Questions registration dataset access Hugging Face rule clarification model weights RTC platform local simulation' },
       { route: 'organizers', anchor: '', title: 'Organizers' }
     ];
 
@@ -1799,7 +2036,18 @@
 
     function routeLabel(route) {
       if (route === 'challenge') return 'RTC-SDD Challenge';
+      if (route === 'faqs') return 'FAQs';
       return route.charAt(0).toUpperCase() + route.slice(1);
+    }
+
+    function getSearchTargetText(item) {
+      const page = pages.find(page => page.dataset.page === item.route);
+      const target = item.anchor ? document.getElementById(item.anchor) : page;
+      return (target || page || document.createElement('div')).textContent.replace(/\s+/g, ' ').trim();
+    }
+
+    function getSearchText(item) {
+      return `${item.title} ${item.text || ''} ${getSearchTargetText(item)}`.toLowerCase();
     }
 
     function formatUpdatedDate(value) {
@@ -1905,7 +2153,7 @@
     function renderSearchResults(query) {
       const q = query.trim().toLowerCase();
       const results = q
-        ? searchIndex.filter(item => `${item.title} ${item.text}`.toLowerCase().includes(q))
+        ? searchIndex.filter(item => getSearchText(item).includes(q))
         : searchIndex;
 
       if (!results.length) {
