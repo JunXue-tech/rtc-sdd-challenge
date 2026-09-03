@@ -33,14 +33,13 @@ DFKI-SLT
 ox-team
 NBU_CKC
 mcfl_team_4
-mcfl_team_1
 BIUBIUBIU
 RTC_Guard
 Avengers
 lab1010
-Overtone
 FlashAttention
 True Audio Security Team
+MCFL-Team-2
 Anno Tokyo
 gugugaga analyst
 musevoice
@@ -50,10 +49,20 @@ UESTC
 AAA
 AuroraPulse
 KZXU
+Ghostbusters
 tonghuashungogogo
 Mark Two
+VCBSL
 Raid AI
 szshen
 Erin
 Zyear_team
 AI voice
+MIG
+TemmieX
+amigo
+Overtone
+ADTaudio
+mcfl_team_1
+BIT-AntiSpoof
+zolozgo
