@@ -1,4 +1,4 @@
-# updatedAt: 2026-09-05
+# updatedAt: 2026-09-08
 
 baiyangzhijian
 ASTAR_SHIELD
@@ -63,7 +63,6 @@ amigo
 Overtone
 ADTaudio
 mcfl_team_1
-BIT-AntiSpoof
 zolozgo
 Horizon Computing Group
 Cedar Computing Group
@@ -118,5 +117,12 @@ Signal Systems Lab
 Spark Research
 qzy01
  Nanofinal
-WIT_cs
 Longyuan AI
+WIT_cs
+Signal Vision
+Common Tech.
+HIT VIRLAB
+BIT-AntiSpoof
+Daemon
+TXBmenace
+sunshine77777
