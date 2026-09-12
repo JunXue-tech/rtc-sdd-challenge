@@ -1,4 +1,4 @@
-# updatedAt: 2026-09-09
+# updatedAt: 2026-09-12
 
 baiyangzhijian
 ASTAR_SHIELD
@@ -126,10 +126,18 @@ BIT-AntiSpoof
 Daemon
 TXBmenace
 sklois
-sunshine77777
 Genshin
+VoAI
+AISRC
 Stone Brothers
 CAU_KU
 ZeroFake
 KLASS
 NeuralNet
+AudioAgent
+Ironman
+cutegirl
+CheryFSAI
+AppleCanDo
+Ruvix
+HanyFarid
