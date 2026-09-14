@@ -1882,6 +1882,46 @@
               <p>For subsequent papers, author affiliations should follow the actual authorship information and the applicable affiliation requirements.</p>
             </div>
           </details>
+
+          <details class="faq-item">
+            <summary>
+              <span class="faq-topic">Rule Clarification</span>
+              <span>Is weight averaging across different training runs allowed?</span>
+            </summary>
+            <div class="faq-answer">
+              <p>Yes. Weight averaging across different training runs is permitted, provided that the final submission uses a single set of model weights and inference is performed with a single model. Combining predictions, scores, or outputs from multiple models remains prohibited.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span class="faq-topic">Rule Clarification</span>
+              <span>Can official bonafide audio be resynthesized to generate additional spoof training data?</span>
+            </summary>
+            <div class="faq-answer">
+              <p>No. Using vocoders, voice-conversion models, or similar methods to generate additional spoof speech samples from the official data is not permitted.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span class="faq-topic">Evaluation</span>
+              <span>Will the evaluation protocol disclose condition or language information for individual utterances?</span>
+            </summary>
+            <div class="faq-answer">
+              <p>No. The evaluation protocol will not disclose condition or language information for individual utterances.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span class="faq-topic">Evaluation</span>
+              <span>Will the evaluation set contain offline audio?</span>
+            </summary>
+            <div class="faq-answer">
+              <p>No. The evaluation set will contain only transmitted <strong>online</strong> audio and will not include offline audio.</p>
+            </div>
+          </details>
         </div>
       </section>
     </section>
@@ -2020,7 +2060,7 @@
       { route: 'challenge', anchor: 'evaluation-metrics', title: 'Evaluation Metrics'},
       { route: 'instructions', anchor: '', title: 'Instructions' },
       { route: 'rules', anchor: '', title: 'Rules' },
-      { route: 'faqs', anchor: '', title: 'FAQs', text: 'Frequently Asked Questions registration dataset access Hugging Face rule clarification model weights RTC platform local simulation evaluation Macro-F1 threshold fixed 0.5 MUSAN speech subset data augmentation external non-speech datasets publicly available models tools official data external resource rules team members affiliation primary multiple affiliations author papers authorship requirements' },
+      { route: 'faqs', anchor: '', title: 'FAQs', text: 'Frequently Asked Questions registration dataset access Hugging Face rule clarification model weights RTC platform local simulation evaluation Macro-F1 threshold fixed 0.5 MUSAN speech subset data augmentation external non-speech datasets publicly available models tools official data external resource rules team members affiliation primary multiple affiliations author papers authorship requirements weight averaging training runs single set inference model combining predictions scores outputs official bonafide audio resynthesized vocoders voice-conversion spoof samples evaluation protocol condition language information utterances offline online transmitted audio' },
       { route: 'organizers', anchor: '', title: 'Organizers' }
     ];
 

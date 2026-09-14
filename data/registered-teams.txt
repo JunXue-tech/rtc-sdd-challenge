@@ -1,4 +1,4 @@
-# updatedAt: 2026-09-12
+# updatedAt: 2026-09-14
 
 baiyangzhijian
 ASTAR_SHIELD
@@ -131,6 +131,7 @@ VoAI
 AISRC
 Stone Brothers
 CAU_KU
+Six
 ZeroFake
 KLASS
 NeuralNet
@@ -141,3 +142,5 @@ CheryFSAI
 AppleCanDo
 Ruvix
 HanyFarid
+IMPULSELAB
+CLIPER
