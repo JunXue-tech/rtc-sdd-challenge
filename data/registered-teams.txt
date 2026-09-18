@@ -1,4 +1,4 @@
-# updatedAt: 2026-09-14
+# updatedAt: 2026-09-18
 
 baiyangzhijian
 ASTAR_SHIELD
@@ -133,6 +133,7 @@ Stone Brothers
 CAU_KU
 Six
 ZeroFake
+LCorp
 KLASS
 NeuralNet
 AudioAgent
@@ -140,7 +141,28 @@ Ironman
 cutegirl
 CheryFSAI
 AppleCanDo
+gogogo
 Ruvix
 HanyFarid
 IMPULSELAB
 CLIPER
+learner
+Thunder
+DeepFake Slayers
+SUSTech Chovy
+justaispeech
+WHU_Huang_12
+Metacrowd
+cuit_77777
+viga-viga-yi
+Midas
+123team
+KETI-MMRC
+DashLab
+SoundingSus
+ankit723_mandi
+FNUU
+Kryoniq
+linlin234
+Null
+Whispeak
