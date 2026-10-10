@@ -1,4 +1,4 @@
-# updatedAt: 2026-09-18
+# updatedAt: 2026-10-10
 
 baiyangzhijian
 ASTAR_SHIELD
@@ -25,7 +25,6 @@ THREETO
 AFCT
 CCNT
 scy919
-TUA
 anti spoofing 2026
 NJUPT AIC
 Begonia Creek
@@ -162,7 +161,50 @@ DashLab
 SoundingSus
 ankit723_mandi
 FNUU
-Kryoniq
 linlin234
 Null
 Whispeak
+AKCIT-Deepfake
+LOL
+Dream
+ccu VLSI lab
+SPECIFYYY
+Scistor-RTC
+JJLabubu
+HORN2
+CangYuan
+detective_123
+MortacciTAU
+zs9999
+LinkW
+TUA
+bu_audio
+yiwise
+Data lab
+DDyczz
+DeepASV
+Spoofia
+Kryoniq
+ludeng
+Yaner
+THUHCSI-Safety
+Reinforced Learners
+LoCo
+Yonsei MCML
+Emil Zawistowski
+ekasvara
+PRL ChannelProof
+VGLab
+fanainong
+RSI-SAIL
+MOSIS-Lab
+ShallowReal
+asvp.scut
+baiyang
+YCCCCM
+Amadeus
+Cerberus
+xyzhang
+Just because you are too beautiful
+DHU_szm
+communicationsystem

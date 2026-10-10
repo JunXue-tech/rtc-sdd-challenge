@@ -839,10 +839,41 @@
     .registered-team-list {
       display: flex;
       flex-wrap: wrap;
+      align-content: flex-start;
       gap: 10px;
+      max-height: 360px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding-right: 8px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--line-strong) transparent;
+    }
+    @supports selector(::-webkit-scrollbar) {
+      .registered-team-list {
+        scrollbar-width: auto;
+        scrollbar-color: auto;
+      }
+      .registered-team-list::-webkit-scrollbar {
+        width: 4px;
+      }
+      .registered-team-list::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .registered-team-list::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background: var(--line-strong);
+      }
+      .registered-team-list::-webkit-scrollbar-button {
+        display: none;
+      }
+    }
+    .registered-team-list:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
     }
     .team-chip {
       min-height: 36px;
+      max-width: 100%;
       display: inline-flex;
       align-items: center;
       padding: 0 14px;
@@ -853,6 +884,7 @@
       font-size: 15px;
       font-weight: 800;
       line-height: 1.2;
+      overflow-wrap: anywhere;
     }
     .team-chip.empty {
       color: var(--muted);
@@ -1474,7 +1506,7 @@
             <h2 class="leaderboard-table-title">Registered Teams</h2>
             <p class="registered-team-summary" id="registeredTeamSummary">0 teams registered · Last updated: unknown</p>
             <div class="registered-team-panel">
-              <div class="registered-team-list" id="registeredTeamList" aria-label="Registered teams">
+              <div class="registered-team-list" id="registeredTeamList" role="region" aria-label="Registered teams" tabindex="0">
                 <span class="team-chip empty">Loading teams...</span>
               </div>
             </div>
@@ -1922,6 +1954,18 @@
               <p>No. The evaluation set will contain only transmitted <strong>online</strong> audio and will not include offline audio.</p>
             </div>
           </details>
+
+          <details class="faq-item">
+            <summary>
+              <span class="faq-topic">Evaluation</span>
+              <span>How can I view the Clean Macro-F1 and Noisy Macro-F1 scores for an individual submission?</span>
+            </summary>
+            <div class="faq-answer">
+              <p>You can view the detailed scores of an individual finished submission through the Codabench submission API:</p>
+              <p><code>https://www.codabench.org/api/submissions/&lt;Submission ID&gt;/</code></p>
+              <p>While logged in to Codabench, replace <code>&lt;Submission ID&gt;</code> with the corresponding submission ID. The returned <code>scores</code> field includes the <strong>Clean Macro-F1</strong> and <strong>Noisy Macro-F1</strong> scores for that submission.</p>
+            </div>
+          </details>
         </div>
       </section>
     </section>
@@ -2060,7 +2104,7 @@
       { route: 'challenge', anchor: 'evaluation-metrics', title: 'Evaluation Metrics'},
       { route: 'instructions', anchor: '', title: 'Instructions' },
       { route: 'rules', anchor: '', title: 'Rules' },
-      { route: 'faqs', anchor: '', title: 'FAQs', text: 'Frequently Asked Questions registration dataset access Hugging Face rule clarification model weights RTC platform local simulation evaluation Macro-F1 threshold fixed 0.5 MUSAN speech subset data augmentation external non-speech datasets publicly available models tools official data external resource rules team members affiliation primary multiple affiliations author papers authorship requirements weight averaging training runs same model single model inference combining predictions scores outputs official bonafide audio resynthesized vocoders voice-conversion spoof samples evaluation protocol condition language information utterances offline online transmitted audio' },
+      { route: 'faqs', anchor: '', title: 'FAQs', text: 'Frequently Asked Questions registration dataset access Hugging Face rule clarification model weights RTC platform local simulation evaluation Macro-F1 threshold fixed 0.5 MUSAN speech subset data augmentation external non-speech datasets publicly available models tools official data external resource rules team members affiliation primary multiple affiliations author papers authorship requirements weight averaging training runs same model single model inference combining predictions scores outputs official bonafide audio resynthesized vocoders voice-conversion spoof samples evaluation protocol condition language information utterances offline online transmitted audio Codabench submission API submission ID scores Clean Macro-F1 Noisy Macro-F1 finished submission' },
       { route: 'organizers', anchor: '', title: 'Organizers' }
     ];
 
@@ -2165,6 +2209,7 @@
       const teamLabel = teamCount === 1 ? 'team' : 'teams';
       registeredTeamSummary.textContent = `${teamCount} ${teamLabel} registered · Last updated: ${formatUpdatedDate(updatedAt)}`;
       registeredTeamList.replaceChildren();
+      registeredTeamList.scrollTop = 0;
 
       if (!teams.length) {
         const emptyChip = document.createElement('span');
