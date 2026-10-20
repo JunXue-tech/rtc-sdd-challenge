@@ -1,4 +1,4 @@
-# updatedAt: 2026-10-10
+# updatedAt: 2026-10-20
 
 baiyangzhijian
 ASTAR_SHIELD
@@ -89,7 +89,6 @@ Cedar
 Atlas Data
 WeAreBest
 Vertex Vision
-Vertex SysteX
 SWUnumber1
 Guosfwas
 Lumen Tech
@@ -107,10 +106,8 @@ Orbit Computing
 moeya726bqai@aniimate.net
 BlueWave
 YouthHe
-Data2222
 Signal Systems lab
 strong28
-IloveAI
 Quantum Data Lab
 Signal Systems Lab
 Spark Research
@@ -162,7 +159,6 @@ SoundingSus
 ankit723_mandi
 FNUU
 linlin234
-Null
 Whispeak
 AKCIT-Deepfake
 LOL
@@ -179,9 +175,7 @@ zs9999
 LinkW
 TUA
 bu_audio
-yiwise
 Data lab
-DDyczz
 DeepASV
 Spoofia
 Kryoniq
@@ -189,13 +183,12 @@ ludeng
 Yaner
 THUHCSI-Safety
 Reinforced Learners
-LoCo
 Yonsei MCML
 Emil Zawistowski
 ekasvara
 PRL ChannelProof
 VGLab
-fanainong
+ShroBox Tenants
 RSI-SAIL
 MOSIS-Lab
 ShallowReal
@@ -204,7 +197,30 @@ baiyang
 YCCCCM
 Amadeus
 Cerberus
+Amadeus
 xyzhang
-Just because you are too beautiful
 DHU_szm
 communicationsystem
+Just because you are too beautiful
+daydayup
+MWS AI
+Telewin
+TWJ
+Claude Code & Friends
+QWER
+SAA
+EG Aura
+obari
+SIGS-MaLab
+JTeam
+xu
+mcci-l
+ZLY-Audio
+kaibutsu
+KaiAudio
+anti spoofing 2026
+BUPT2SCUT
+SPYxFAMILY
+TheSift
+duolingo
+AudioShield
