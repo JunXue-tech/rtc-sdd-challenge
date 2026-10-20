@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 concurrency:
   group: sync-registered-teams
@@ -41,6 +42,7 @@ jobs:
         run: python scripts/sync_registered_teams.py
 
       - name: Commit and push changes
+        id: commit
         run: |
           if [ -z "$(git status --porcelain -- data/registered-teams.txt)" ]; then
             echo "Team list unchanged"
@@ -51,3 +53,15 @@ jobs:
           git add -- data/registered-teams.txt
           git commit -m "Sync registered teams from registration sheet"
           git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Rebuild GitHub Pages
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl --fail-with-body --silent --show-error \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages/builds"

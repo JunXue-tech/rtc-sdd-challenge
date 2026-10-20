@@ -19,7 +19,9 @@ only when the names change.
    Verify that it succeeds before pausing the existing local Codex schedule.
 
 The workflow uses the repository's `GITHUB_TOKEN` with `contents: write` to push
-only a changed team-list file. A failed Sheets read, invalid header, or empty
-list stops the job before any commit or push. Service account keys are long-lived;
+only a changed team-list file. It then requests a GitHub Pages build because
+commits pushed with `GITHUB_TOKEN` do not trigger one automatically. A failed
+Sheets read, invalid header, or empty list stops the job before any commit or
+push. Service account keys are long-lived;
 keep this account limited to Viewer access on the required spreadsheet and
 rotate or remove the key when the sync is no longer needed.
