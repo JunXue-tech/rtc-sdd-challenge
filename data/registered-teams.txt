@@ -1,4 +1,4 @@
-# updatedAt: 2026-10-20
+# updatedAt: 2026-10-22
 
 baiyangzhijian
 ASTAR_SHIELD
@@ -219,8 +219,11 @@ ZLY-Audio
 kaibutsu
 KaiAudio
 anti spoofing 2026
+PerceptAI
 BUPT2SCUT
 SPYxFAMILY
 TheSift
 duolingo
 AudioShield
+HappyTeam
+stenograf
