@@ -938,6 +938,50 @@
     .person-card .role { margin-top: 4px; color: var(--muted); font-size: 14px; font-weight: 800; }
     .person-card .email { margin-top: 10px; font-size: 14px; overflow-wrap: anywhere; }
 
+    .service-dialog {
+      width: min(680px, calc(100% - 32px));
+      max-height: min(760px, calc(100dvh - 32px));
+      padding: 0;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius-sm);
+      color: var(--ink);
+      background: var(--surface);
+      box-shadow: 0 24px 70px rgba(15, 36, 55, .22);
+      overflow: auto;
+    }
+    .service-dialog::backdrop { background: rgba(15, 36, 55, .52); }
+    .service-dialog-head {
+      padding: 12px 20px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .service-dialog-head h2 { margin: 0; font-size: 18px; line-height: 1.35; }
+    .service-dialog-close {
+      width: 32px;
+      height: 32px;
+      flex: 0 0 auto;
+      padding: 0;
+      border: 0;
+      color: var(--muted);
+      background: transparent;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .service-dialog-close:hover { color: var(--ink); }
+    .service-dialog-close:focus-visible { color: var(--blue); outline: none; }
+    .service-dialog-body { padding: 14px 20px 18px; font-size: 14px; line-height: 1.5; }
+    .service-dialog-body p { margin: 0 0 10px; text-align: left; }
+    .service-dialog-body p:last-child { margin-bottom: 0; }
+    .service-dialog-body ul { margin: 0 0 10px; padding-left: 20px; }
+    .service-dialog-body li { margin-bottom: 12px; text-align: left; }
+    .service-dialog-body li:last-child { margin-bottom: 0; }
+    .service-dialog-body li strong { display: block; margin-bottom: 6px; }
+    .service-dialog-body li p { margin-bottom: 8px; }
+
     .search-backdrop {
       position: fixed;
       inset: 0;
@@ -1078,6 +1122,8 @@
       .overview-image { border-radius: var(--radius-sm); }
       .overview-process-card { padding: 22px; border-radius: var(--radius-md); }
       .footer-inner { flex-direction: column; align-items: flex-start; }
+      .service-dialog-head { padding: 10px 16px 8px; }
+      .service-dialog-body { padding: 14px 16px 18px; }
     }
 
     @media (max-width: 520px) {
@@ -1480,6 +1526,7 @@
         <p class="timeline-note">
           * The first four dates follow AoE; paper-related dates follow US Pacific Time, with deadlines at 11:59 PM.
         </p>
+        <p class="timeline-note">Published challenge dates remain unchanged for now. If the outage continues, any deadline changes will be announced after its impact is assessed.</p>
       </section>
 
       <section class="section wide" id="contact">
@@ -1673,13 +1720,13 @@
               <h3>Register your team</h3>
               <ul>
                 <li>
-                  If you do not already have a Codabench account, please create one first.
+                  While CodaBench is unavailable, you may submit the registration form without creating an account first.
                 </li>
                 <li>
-                  Complete the team registration form with your team name, members’ names, contact email addresses, affiliation, and Codabench username. All registration information must be provided in English.
+                  Complete the form in English. CodaBench fields remain mandatory; enter your planned account details if needed, and submit an updated form if they change after service resumes.
                 </li>
                 <li>
-                 After submitting the team registration form, please apply to participate in the challenge on Codabench. The organizers will review the registration information submitted through both the registration form and Codabench.
+                  Please also request RTCFake dataset access. Once your competition registration is approved, we will approve your dataset request without waiting for CodaBench registration approval. Apply on CodaBench when service resumes.
                 </li>
                 <li>
                 Teams whose registrations have been approved will be listed on the Leaderboard page of the official website. If you notice any incorrect information, experience a delay in the review process, or encounter any other issues, please contact the organizers.
@@ -1693,7 +1740,7 @@
             <div class="num-badge">2</div>
             <div>
               <h3>Download dataset and baseline</h3>
-              <p>Use the official RTCFake dataset and baseline code as the starting point. Keep train, development, progress, and evaluation partitions logically separated.</p>
+              <p>Request the official RTCFake dataset and use the baseline code to get started. Keep train, development, progress, and evaluation partitions separate.</p>
               <div class="tag-group">
                 <a class="button soft" href="https://huggingface.co/datasets/JunXueTech/RTCFake/tree/main" target="_blank" rel="noreferrer">Dataset</a>
                 <a class="button soft" href="https://github.com/JunXue-tech/RTC-SDD" target="_blank" rel="noreferrer">Baseline Code</a>
@@ -1711,7 +1758,7 @@
             <div class="num-badge">4</div>
             <div>
               <h3>Submit predictions on Codabench</h3>
-              <p>Prepare a two-column score file using the required format: <code>utterance_id score</code>. Scores should be normalized to <code>[0, 1]</code>.</p>
+              <p>Prepare a two-column score file in the format <code>utterance_id score</code>, with scores in <code>[0, 1]</code>. Submit it once CodaBench is available again.</p>
               <a class="button soft" href="https://www.codabench.org/competitions/17381/" target="_blank" rel="noreferrer">Codabench</a>
             </div>
           </article>
@@ -2063,6 +2110,28 @@
     </section>
   </main>
 
+  <dialog class="service-dialog" id="serviceNotice" aria-labelledby="serviceNoticeTitle">
+    <div class="service-dialog-head">
+      <h2 id="serviceNoticeTitle">⚠️ Temporary Arrangements During the CodaBench Outage</h2>
+      <button class="service-dialog-close" id="serviceNoticeClose" type="button" aria-label="Close announcement">&times;</button>
+    </div>
+    <div class="service-dialog-body">
+      <p>Due to the ongoing CodaBench outage, registration and approval on the platform are currently unavailable. To minimize the impact, we have made the following temporary arrangements:</p>
+      <ul>
+        <li>
+          <strong>Registration and Dataset Access</strong>
+          <p>Participants may complete the <a href="https://forms.gle/Tp6s4Um9GXhBYN4D7" target="_blank" rel="noreferrer">registration form</a> using their planned CodaBench account information and apply for access to the <a href="https://huggingface.co/datasets/JunXueTech/RTCFake" target="_blank" rel="noreferrer">RTCFake dataset</a>.</p>
+          <p>Dataset access will be granted once their registration information is approved, without requiring prior CodaBench approval.</p>
+          <p>After the platform is restored, participants may complete their CodaBench registration and resubmit the form if their account information changes.</p>
+        </li>
+        <li>
+          <strong>Competition Schedule</strong>
+          <p>If the outage persists, competition deadlines may be extended based on its actual duration and impact.</p>
+        </li>
+      </ul>
+    </div>
+  </dialog>
+
   <div class="search-backdrop" id="searchBackdrop" role="dialog" aria-modal="true" aria-label="Global search">
     <div class="search-modal">
       <div class="search-head">
@@ -2091,6 +2160,8 @@
     const searchResults = document.getElementById('searchResults');
     const searchClose = document.getElementById('searchClose');
     const searchOpenButtons = Array.from(document.querySelectorAll('[data-search-open]'));
+    const serviceNotice = document.getElementById('serviceNotice');
+    const serviceNoticeClose = document.getElementById('serviceNoticeClose');
     const registeredTeamSummary = document.getElementById('registeredTeamSummary');
     const registeredTeamList = document.getElementById('registeredTeamList');
 
@@ -2314,6 +2385,8 @@
       if (event.target === searchBackdrop) closeSearch();
     });
 
+    serviceNoticeClose.addEventListener('click', () => serviceNotice.close());
+
     document.addEventListener('keydown', event => {
       const key = event.key.toLowerCase();
       if (event.key === 'Escape') {
@@ -2329,6 +2402,7 @@
     window.addEventListener('hashchange', () => setPage(getRouteFromHash(), true, getAnchorFromHash()));
     loadRegisteredTeams();
     setPage(getRouteFromHash(), false, getAnchorFromHash());
+    serviceNotice.showModal();
   </script>
 </body>
 </html>
