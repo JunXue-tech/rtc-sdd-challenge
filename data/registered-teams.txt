@@ -1,4 +1,4 @@
-# updatedAt: 2026-10-26
+# updatedAt: 2026-10-27
 
 baiyangzhijian
 ASTAR_SHIELD
@@ -211,6 +211,7 @@ QWER
 SAA
 EG Aura
 obari
+Credence
 SIGS-MaLab
 JTeam
 xu
@@ -230,3 +231,5 @@ stenograf
 aluminumbox
 steins_gate
 Gradiant
+Eddie at MetaCircle
+AudioShield
