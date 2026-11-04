@@ -1,4 +1,4 @@
-# updatedAt: 2026-11-01
+# updatedAt: 2026-11-05
 
 baiyangzhijian
 ASTAR_SHIELD
@@ -231,7 +231,6 @@ HappyTeam
 stenograf
 aluminumbox
 steins_gate
-Gradiant
 Eddie at MetaCircle
 AudioShield
 EchoVerify
@@ -239,3 +238,5 @@ syouya_tobita
 QI-Tian
 TrailBlazers
 NaiLongTeam
+Blue Zero
+Gradiant
