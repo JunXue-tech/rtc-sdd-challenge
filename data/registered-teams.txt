@@ -1,4 +1,4 @@
-# updatedAt: 2026-11-09
+# updatedAt: 2026-11-11
 
 baiyangzhijian
 ASTAR_SHIELD
@@ -62,7 +62,6 @@ amigo
 Overtone
 ADTaudio
 mcfl_team_1
-zolozgo
 Horizon Computing Group
 Cedar Computing Group
 Lumen Computing Group
@@ -225,7 +224,6 @@ BUPT2SCUT
 SPYxFAMILY
 TheSift
 duolingo
-AudioShield
 diana_sandu
 HappyTeam
 stenograf
@@ -238,7 +236,6 @@ syouya_tobita
 QI-Tian
 TrailBlazers
 NaiLongTeam
-Blue Zero
 yaoyu
 Gradiant
 mozhu
@@ -247,3 +244,4 @@ WhateverYouSay
 JAM
 Team BeruG
 INTSIG
+QS Labs
